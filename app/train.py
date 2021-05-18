@@ -1,5 +1,6 @@
 import sys
 from src.data import get_data, visualize_data
+from src.data import 
 
 def usage():
 	if len(sys.argv) != 2:
@@ -9,7 +10,8 @@ def usage():
 def main():
 	usage()
 	data = get_data(sys.argv[1])
-	visualize_data(data)
+
+	# visualize_data(data)
 
 if __name__ == "__main__":
 	main()

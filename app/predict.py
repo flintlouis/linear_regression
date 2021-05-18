@@ -1,5 +1,5 @@
 import sys
-from src.price import predict_price
+from src.theta import predict_price
 
 def usage():
 	if len(sys.argv) != 1:
