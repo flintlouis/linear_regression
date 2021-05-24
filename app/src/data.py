@@ -9,8 +9,12 @@ def get_data(path):
 		exit()
 	return data
 
-def visualize_data(data):
-	plt.scatter(data.km, data.price, marker='o')
-	plt.xlabel('km')
-	plt.ylabel('price')
+def visualize_data(X, y, theta0=0, theta1=0):
+	pred = theta0 + (theta1 * X)
+	plt.plot(X, pred, "-r", label="price=theta0+(theta1*mileage)")
+	plt.title("Linear regression from mileage to price")
+	plt.legend(loc="upper right")
+	plt.scatter(X, y, marker="o")
+	plt.xlabel("km")
+	plt.ylabel("price")
 	plt.show()

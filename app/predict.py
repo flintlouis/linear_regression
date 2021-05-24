@@ -1,5 +1,6 @@
 import sys
 from src.theta import predict_price
+from src.file import read_theta_from_file
 
 def usage():
 	if len(sys.argv) != 1:
@@ -21,7 +22,8 @@ def main():
 	while True:
 		success, mileage = read_mileage()
 		if success:
-			price = predict_price(mileage)
+			theta0, theta1 = read_theta_from_file()
+			price = predict_price(mileage, theta0, theta1)
 			print("price prediction :", price)
 		else:
 			continue
