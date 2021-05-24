@@ -24,7 +24,7 @@ class LRModel:
 	def __calculate_mean(self, data):
 		return np.sum(data) / len(data)
 
-	def __linear_regression(self):
+	def __least_squares(self):
 		data_mean = self.__calculate_mean(self.data)
 		labels_mean = self.__calculate_mean(self.labels)
 
@@ -37,19 +37,35 @@ class LRModel:
 		self.theta0 = theta0
 		self.theta1 = theta1
 
-	def fit(self, epochs=1000, learning_rate=0.03):
+	def __min_max_scaling(self, data):
+		data_min, data_max = data.min(), data.max()
+		return np.interp(data, [data_min, data_max], [0, 1])
 
-		self.__linear_regression()
+	def __standard_deviation(self, data):
+		data_mean = self.__calculate_mean(data)
+		std = sum((data - data_mean)**2)
+		std *= (1/len(data))
+		return np.sqrt(std)
+
+	def __normalize_data(self, data):
+		# return (data - self.__calculate_mean(data)) / self.__standard_deviation(data)
+		return (data - np.mean(data)) / np.std(data)
+
+	def __gradient_descent(self, epochs, learning_rate):
+		data = self.__normalize_data(self.data)
+		labels = self.__normalize_data(self.labels)
+		tmpT0, tmpT1 = 0, 0
+		for _ in range(epochs):
+			tmpT0 = learning_rate * (1/self.size) * (sum(self.predict(data) - labels))
+			tmpT1 = learning_rate * (1/self.size) * (sum((self.predict(data) - labels) * data))
+			self.theta0 -= tmpT0
+			self.theta1 -= tmpT1
+
+
+	def fit(self, epochs=500, learning_rate=0.05):
+
+		assert epochs > 0, "epochs cannot be less then 0"
+		self.__gradient_descent(epochs, learning_rate)
+		# 8499.599649933216 -0.0214489635917023
 		print(self.theta0, self.theta1)
-		# m = 0
-		# b = 0
-		# for _ in range(epochs):
-		# 	for i in range(self.size):
-		# 		x = np.interp(self.data[i], [min(self.data), max(self.data)], [0, 1])
-		# 		y = np.interp(self.labels[i], [min(self.labels), max(self.labels)], [0, 1])
-		# 		guess = m * x + b
-		# 		error = y - guess
-		# 		m = m + (error * x) * learning_rate
-		# 		b = b + (error) * learning_rate
-		# print(m, b)
 

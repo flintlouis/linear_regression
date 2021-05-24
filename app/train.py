@@ -15,7 +15,7 @@ def main():
 	data = get_data(sys.argv[1])
 	model = LRModel(data.km, data.price)
 	model.fit()
-	visualize_data(data.km, data.price, model.theta0, model.theta1)
+	# visualize_data(data.km, data.price, model.theta0, model.theta1)
 
 if __name__ == "__main__":
 	main()
