@@ -1,7 +1,6 @@
 import sys
 from src.data import get_data
 from src.LinearRegression import LRModel
-from src.file import write_theta_to_file
 from src.data import visualize_data
 import numpy as np
 
@@ -15,6 +14,7 @@ def main():
 	data = get_data(sys.argv[1])
 	model = LRModel(data.km, data.price)
 	model.fit()
+	# model.save_weights()
 	visualize_data(model.data, model.labels, model.theta0, model.theta1)
 
 if __name__ == "__main__":
