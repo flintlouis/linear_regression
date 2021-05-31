@@ -5,6 +5,7 @@ class LRModel:
 
 	def __init__(self, data, labels):
 		self.size = len(data)
+		assert self.size > 1, "Data size should be larger than 1"
 		self.data = data
 		self.labels = labels
 		self.theta0 = 0
