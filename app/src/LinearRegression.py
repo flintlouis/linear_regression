@@ -1,7 +1,7 @@
 import numpy as np
 from src.file import write_theta_to_file, read_theta_from_file, THETA_FILE_PATH
 
-class LRModel:
+class LinearRegression:
 
 	def __init__(self, data, labels):
 		self.size = len(data)

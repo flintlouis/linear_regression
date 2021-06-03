@@ -1,6 +1,6 @@
 import argparse
 from src.data import get_data
-from src.LinearRegression import LRModel
+from src.LinearRegression import LinearRegression
 from src.data import visualize_data
 
 def usage():
@@ -13,7 +13,7 @@ def usage():
 def main():
 	args = usage()
 	data = get_data(args.data)
-	model = LRModel(data.km, data.price)
+	model = LinearRegression(data.km, data.price)
 	model.fit()
 	model.save_weights()
 	if args.visualize:
